@@ -1,0 +1,198 @@
+= Jeu _Rogue-Like_
+
+.Complétez les informations ci-dessous.
+[NOTE]
+====
+* Github URL : https://github.com/uvsq-hal2223/cprog-td4-the-w-s
+* NOM 1 : LABDI, Wassim, 21918209
+* NOM 2 : CHERIFI, Wissem, 21604782
+====
+
+L'objet de ce mini-projet est de développer un jeu d'exploration de donjon de type https://fr.wikipedia.org/wiki/Rogue-like[Rogue-like].
+Le thème que vous utiliserez pour ce projet est libre.
+Vous devrez cependant respecter les contraintes fonctionnelles et techniques mentionnées ci-dessous.
+
+[IMPORTANT]
+====
+Vous respecterez les contraintes suivantes:
+
+* Ce mini-projet est à réaliser en Java par groupe de 2 étudiants. ✅
+** les 2 étudiants doivent collaborer sur le même dépôt github. ✅
+* Vous utiliserez `git` en effectuant des commits réguliers comportant des messages informatifs. ✅
+* Il devra comporter une documentation que vous ajouterez dans ce fichier `README.adoc`. 
+** la documentation devra décrire l'usage de l'application (_manuel utilisateur_) ainsi que la conception du jeu (_manuel technique_).
+* Le _build_ sera assuré par Maven et plus précisément Maven wrapper (déjà intégré dans le projet).✅
+Aucune manipulation en dehors de Maven ne devra être nécessaire.
+* La version de Java à utiliser est la https://adoptium.net/[version 17].✅
+* Le _build_ devra intégrer `checkstyle` pour la vérification des règles de codages Google.✅
+Le projet devra donc les respecter.
+`checkstyle` devra être exécuté automatiquement durant la phase `validate` du cycle de vie par défaut.✅
+* Des tests unitaires https://junit.org/junit5/docs/current/user-guide/[JUnit 5] (version https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter/5.9.1[_5.9.1_]) devront être disponibles pour la plupart des méthodes développées.
+* Un outil de https://fr.wikipedia.org/wiki/Couverture_de_code[_Code Coverage_] devra être intégré au _build_
+* Les fonctionnalités du langage Java devront être utilisées au mieux (POO, exceptions, librairie de collections, I/O, …).
+* L'application devra pouvoir être exécutée à partir d'un `jar` incluant toutes les dépendances.✅
+====
+
+== Description du jeu
+* L'univers du jeu est représenté par un ensemble de cases carrées représentant différents éléments (_sol, mur, objet, personnage, …_).✅
+* L'univers du jeu est généré aléatoirement en début de partie.✅
+* Le jeu permet de déplacer un Personnage Joueur (PJ) en mode tour par tour.✅
+* Le jeu comporte également des Personnages Non Joueur (PNJ).✅
+* Le PJ possède des caractéristiques (_points de vie, de magie, …_) et un équipement (_pièces de monnaie, armes, …_).✅
+* Le PJ peut interagir avec son environnement (_ramasser ou utiliser un objet, discuter avec un PNJ, combattre un monstre, …_).✅
+* Les PNJ obéissent aux mêmes règles que le PJ mais sont contrôlés par le jeu.✅
+
+== Description de l'application à réaliser
+* L'interface proposera une visualisation de l'univers en mode texte (une case est représentée par un caractère symbole).✅
+* Les actions du joueur seront saisies au clavier sous la forme `<action> <objet>` (par exemple `ramasser clé`).✅
+* Une interface textuelle spécifique pourra être proposée pour des situations particulières (_création du personnage, sélection d'un sort, discussion, …_).✅
+* L'état de la partie devra pouvoir être sauvegardée et rechargée à tout moment.✅
+
+== Références
+* Article Wikipedia https://fr.wikipedia.org/wiki/Rogue-like[Rogue-like]
+* Tutoriels :
+http://trystans.blogspot.fr/2016/01/roguelike-tutorial-00-table-of-contents.html[roguelike tutorial],
+https://jellepelgrims.com/posts/roguelike_java[Writing a roguelike in Java]
+* Quelques bibliothèques :
+http://fusesource.github.io/jansi/[JAnsi] (couleur dans un terminal),
+https://github.com/jline/jline3[JLine] (gestion des saisies)
+
+== Manuel utilisateur
+> À compléter :
+> Dans quel univers se déroule le jeu ?
+
+Le jeu ce déroule dans un univers inspiré de mario dans lequel notre personnage a pour objectif de sauver une princesse enfermée dans une salle.
+
+> Quel est le but du jeu ?
+
+Le but du jeu est de sauver une princesse enfermée dans une salle. Cette salle est accéssible que part une porte dont la clef est perdue sur la map. Le personne doit récupérer la clef tout en affrontant des monstres. 
+
+> Quelles sont les caractéristiques du PJ ?
+
+Le PJ possède des points de vies, des points de dégats et une quantité de d'or sur lui. Il a aussi la possibilité de possèder une arme à ramasser sur la map lui donnant un bonus de dégats. 
+
+> Que peuvent faire les PNJ ?
+
+Le PNJ sur la map peut donner des potions en échange d'une certaine quantité d'or. Ces potions se traduisent en bonus de vie ou de dégats selon la volonté du joueur. 
+
+> Quelles interactions/commandes sont disponibles ?
+
+Dans le jeu on peut à tout moment sauvegarder une partie en tapant "S" et charger une partie précédemment sauvegardé en tapant "B". En début du lancement du jeu, on doit taper "G" pour lancer la partie. 
+
+> Quelles évolutions peut-on envisager ?
+
+Au niveau de l'amélioration du jeu, on pourrait éventuellement rajouter un choix de niveaux de difficultés en début de partie. Ce choix aurait une influence sur la génération des maps, les dégats des monstres et le timer de partie. 
+
+On pourrait aussi de façon générale rajouter des maps dans le jeu et faire une vraie génération procédurale. 
+
+On pourrait également rajouter plusieurs objetifs annexes avant de sauver la princesse qui est le but ultime. Ces quêtes annexes pourraient être donnés par d'autres PNJ disposés sur la map. 
+
+On pourrait pour finir rajouter la possibilité de passer de map en map à l'aide de portes disposées à certaines exptrémités des maps pour agrandir le terrain de jeu sans augmenter la taille individuelle des maps. Ce rajout nous permettrait de mettre en place les quêtes annexes plus facilement. 
+
+
+== Manuel technique
+=== Compiler le projet
+.Sous Linux
+----
+$ ./mvnw package
+----
+
+.Sous Windows
+----
+> mvnw.cmd package
+----
+
+=== Éxécuter l'application
+----
+$ java -jar target/roguelike-1.0.SNAPSHOT-jar-with-dependencies.jar 
+----
+
+
+=== Rapport de couverture de code
+.Pour consulter le rapport de couverture de code par les tests (Code Coverage) nous avons utilisé jacoco , on a couvert 92% du code par des tests , le reste du code qui n'a pas été couvert sont majoritairement des excepttions lors de la lecture du fichier ou des 
+exceptions du genre . Pour consulter le rapport de couverture du code , on doit tout d'abord compiler le projet avec les commandes 
+ci-dessus, après la compilation, un répertoire `target` est créé,on accède à ce répertoire ,ensuite au dossier `my-reports` et on 
+remarque qu'il y'a un fichier .html nomé `index` en cliquant sur ce fichier , on peut donc consulter le code coverage . 
+
+=== Rôle des différentes classes  
+Weapon.java
+----
+Classe qui gère la création des armes avec quelques getters .
+----
+
+TraitementDeplacement.java
+----
+Classe qui permet d'analyser l'ensemble des déplacements des PJ et des PNJ , 
+quand on tape flèche droite par exemple , le PJ se déplace à droite et les 
+monstres se déplacent à gauche .
+----
+
+RogueLikeApp.java
+----
+Classe contenant le main du programme et fait appel à l'ensemble des fonctionnalités 
+qu'on a codé tout en utilisant des KeyListener pour lire les touches du clavier 
+tapé par l'utilisateur .
+----
+
+PnjException.java et PjException.java
+----
+Classes d'exceptions qui se déclenche lorsque le nombre de joueurs ou de monstres
+n'est pas bon .
+----
+
+Pnj.java Player.java et Monster.java
+----
+Classes qui gère les attributs du pnj et du personnage principale tel que les 
+coordonnées , les dégats ...
+----
+
+LireClavier.java
+----
+Cette classe a été créer pour alléger le main, et faire des traitements à chaque 
+fois que l'utilisateur tape une commande .
+----
+
+Init.java
+----
+C'est la classe la plus importante dans notre code , cette classe initialise 
+la map , les personnages , et fait aussi une partie de la gestion des commandes 
+tapé , comme pour verifier si on est a proximité de la princesse A ...
+----
+
+CharacterStatistics.java
+----
+C'est une classe qui a pour but de save les attributs dans un fichier .properties 
+afin de pouvoir les réutiliser quand le joueur veut accéder à une partie qu'il a 
+sauvegarder 
+----
+
+Countdown.java
+----
+Nous avons proposé de faire cette classe optionnel car le jeu était trop facile 
+sans que le joueur soit contraint par le temps . Dans cette classe , on a un 
+compte a rebours mis a 50 secondes , quand les 50 secondes sont achevés , le 
+joueur a perdu . 
+----
+
+=== Bibliothèques utilisés 
+les bibliothèques `IO` pour gérer tout ce qui est entrée sortie (lecture et écriture de fichier par exemple).
+
+La bibliothèque `java.util.properties` afin de gérer les sauvegardes . 
+
+La bibliothèque `asciiPanel.AsciiPanel` pour gérer l'affichage .
+
+La bibliothèque `java.util.ArrayList` pour stocker des coordonnées dans une ArrayList .
+
+La bibliothèque `java.util.Scanner` pour lire à partir d'un fichier . 
+
+La bibliothèque `java.awt.event.KeyEvent` pour lire ce que l'utilisateur tape . 
+
+La bibliothèque  `javax.swing.JFrame` qui permet de créer et de gérer des objets de type cadre ou fenêtre .
+
+=== Traitement des commandes saisies par l'utilisateur .
+Dans la fonction `public void keyPressed(KeyEvent e)` dans la classe `RogueLikeApp.java` on gère les traitements des commandes tapés par l'utilisateur , quand l'utilisateur tape une commande on fait appel a `lc.deplacer(e)` qui contient un switch case permettant de distinguer les touches tapés , par exemple si on tape la touche G , dans la classe LireClavier on sera dans le cas `case KeyEvent.VK_G` .
+
+=== Améliorations envisageables 
+Dans cette partie, les améliorations qu'on peut envisager sont de mettre les fonctions dans des package différents , mais on a pas fait ce choix car cela a été fait dans les projets proposés et puisqu'on voulait pas trop s'inspirer des projets proposés on a donc opté pour le choix de ne pas utiliser des packages différents , la 2ème raison est que le nombre de classe n'est pas très grand donc meme sans utiliser les package , les classes restent distanguables et lisibles. 
+
+
